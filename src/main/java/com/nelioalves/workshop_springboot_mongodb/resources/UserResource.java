@@ -1,6 +1,7 @@
 package com.nelioalves.workshop_springboot_mongodb.resources;
 
 import com.nelioalves.workshop_springboot_mongodb.domain.User;
+import com.nelioalves.workshop_springboot_mongodb.dto.UserDto;
 import com.nelioalves.workshop_springboot_mongodb.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +21,9 @@ public class UserResource {
     private UserService service;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<User>> findAll(){
+    public ResponseEntity<List<UserDto>> findAll(){
         List<User> list = service.findAll();
-        return ResponseEntity.ok().body(list);
+        List<UserDto> listDto = list.stream().map(x -> new UserDto(x)).toList();
+        return ResponseEntity.ok().body(listDto);
     }
 }
