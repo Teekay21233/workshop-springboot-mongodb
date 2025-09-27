@@ -1,6 +1,7 @@
 package com.nelioalves.workshop_springboot_mongodb.services;
 
 import com.nelioalves.workshop_springboot_mongodb.domain.User;
+import com.nelioalves.workshop_springboot_mongodb.dto.UserDto;
 import com.nelioalves.workshop_springboot_mongodb.repositories.UserRepository;
 import com.nelioalves.workshop_springboot_mongodb.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,13 @@ public class UserService {
         Optional<User> user = repo.findById(id);
 
         return user.orElseThrow(() -> new ObjectNotFoundException("Object not found!"));
+    }
+
+    public User insert(User obj){
+        return repo.insert(obj);
+    }
+
+    public User fromDTO(UserDto objDto){
+        return new User(objDto.getId(),objDto.getName(),objDto.getEmail());
     }
 }
