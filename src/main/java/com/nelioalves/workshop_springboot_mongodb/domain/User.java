@@ -60,10 +60,6 @@ public class User implements Serializable {
         return posts;
     }
 
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
-
     @Override
     public final boolean equals(Object object) {
         if (!(object instanceof User user)) return false;
