@@ -2,6 +2,7 @@ package com.nelioalves.workshop_springboot_mongodb.config;
 
 import com.nelioalves.workshop_springboot_mongodb.domain.Post;
 import com.nelioalves.workshop_springboot_mongodb.domain.User;
+import com.nelioalves.workshop_springboot_mongodb.dto.AuthorDto;
 import com.nelioalves.workshop_springboot_mongodb.repositories.PostRepository;
 import com.nelioalves.workshop_springboot_mongodb.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +34,12 @@ public class Instatiation implements CommandLineRunner {
         User alex = new User(null, "Alex Green", "alex@gmail.com");
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
 
-        Post post1 = new Post(null, LocalDate.parse("21/03/2018",fmt), "Partiu viagem", "Vou viajar para São Paulo. Abraços!",maria);
-        Post post2 = new Post(null, LocalDate.parse("23/03/2018",fmt), "Bom dia", "Acordei feliz hoje!",maria);
-
         userRepository.saveAll(Arrays.asList(maria,alex,bob));
+
+        Post post1 = new Post(null, LocalDate.parse("21/03/2018",fmt), "Partiu viagem", "Vou viajar para São Paulo. Abraços!",new AuthorDto(maria));
+        Post post2 = new Post(null, LocalDate.parse("23/03/2018",fmt), "Bom dia", "Acordei feliz hoje!",new AuthorDto(maria));
+
+
         postRepository.saveAll(Arrays.asList(post1,post2));
     }
 }
