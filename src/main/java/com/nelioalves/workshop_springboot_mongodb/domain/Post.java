@@ -1,6 +1,7 @@
 package com.nelioalves.workshop_springboot_mongodb.domain;
 
 import com.nelioalves.workshop_springboot_mongodb.dto.AuthorDto;
+import com.nelioalves.workshop_springboot_mongodb.dto.CommentDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -8,6 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Document(collection = "post")
@@ -21,6 +24,8 @@ public class Post implements Serializable {
     private LocalDate date;
     private String title;
     private String body;
+
+    private List<CommentDto> comments = new ArrayList<>();
 
     private AuthorDto author;
 
@@ -72,6 +77,10 @@ public class Post implements Serializable {
 
     public void setAuthor(AuthorDto author) {
         this.author = author;
+    }
+
+    public List<CommentDto> getComments() {
+        return comments;
     }
 
 
